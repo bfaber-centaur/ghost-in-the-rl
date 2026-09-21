@@ -2,6 +2,15 @@
 
 Append-only notes from the project. New entries go at the top of the dated log; old entries are not rewritten to make later understanding look cleaner than it was at the time.
 
+
+## 2026-09-21 (UTC) — First metric map
+
+- Added an offline metric-map analyzer that reduces the exact 2,077-tag union using literal path structure before assigning any semantics.
+- First lexical cut: 1,108 dataset-scoped tags, 434 harness-scoped, 160 partial buckets, 34 workload aggregates, 239 penalty-subsystem, 24 train-subsystem, and 78 run-global-looking tags.
+- Defined candidate panels for systems/cadence, sampler/curriculum, RL optimization, workload shape, and train↔inference consistency.
+- Found a Pro-specific retained step-16→17 discontinuity worth plotting: `train/trace/records` +100.2% and `timing_s/trainer_ops` +66.2%, versus -1.5% and +12.4% on Flash. This is recorded as a discontinuity, not attributed to the nearby restart/parallelism notice.
+- Next: align candidate traces with the source-backed event timeline and inspect intervention-adjacent windows. No causal or workload/interconnect classification claim yet.
+
 ## 2026-09-21 (UTC) — Offline inventory and timeline
 
 - Added a standard-library Python analyzer that verifies captured object hashes/lengths, checks returned metric coverage independently of requested tags, and emits the four inventory/timeline artifacts under `analysis/`.

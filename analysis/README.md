@@ -4,6 +4,7 @@ Python 3.10+; standard library only. From the repository root:
 
 ```bash
 python3 analysis/inventory.py --archive mimo-capture-go/data/mimo --out analysis
+python3 analysis/metric_map.py --archive mimo-capture-go/data/mimo --out analysis
 python3 -m unittest discover -s analysis -p 'test_*.py' -v
 ```
 
@@ -35,6 +36,12 @@ not mean every requested tag returned data.
   not a workload classifier.
 - `timeline.csv`: explicit series wall coordinates, status events, run bounds,
   stream start, notices, live samples/latest state, and untimed benchmark results.
+- `01-metric-map.md`: first lexical scope reduction, candidate analysis panels,
+  and trace-level smoke tests with explicit interpretation limits.
+- `metric-map.csv`: generated per-tag lexical features and descriptive trace stats
+  for the exact union of published tags.
+- `metric-shortlist.csv`: generated compact surface containing the 102
+  `run-global-looking` and `train-subsystem` rows for human review.
 
 JSON objects/lists in CSV cells are JSON-encoded; blank scalar cells mean unknown
 or not supplied. `point_count` counts distinct value variants at `(step, wall)`;
@@ -86,7 +93,8 @@ points, run/version identity, multiple wall times, catalog changes, unknown
 schemas, live/completed separation, untimed benchmarks, and deterministic output.
 No raw capture is committed as a fixture.
 
-This initial pass does not evaluate the SPAR proposal or fit a workload model.
-The next step is to read that proposal and map required measurements onto actual
-available fields, retaining the distinction between direct labels and coarse
-operational observations.
+The inventory pass does not evaluate the SPAR proposal or fit a workload model.
+The metric-map pass remains descriptive: scope hints are lexical, tag names are
+not treated as measurement semantics, and intervention-aligned discontinuities
+are not causal attributions. The next analysis step is to plot the candidate
+panels against the source-backed timeline before testing stronger hypotheses.
