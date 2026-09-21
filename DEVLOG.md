@@ -2,6 +2,15 @@
 
 Append-only notes from the project. New entries go at the top of the dated log; old entries are not rewritten to make later understanding look cleaner than it was at the time.
 
+## 2026-09-21 (UTC) — Offline inventory and timeline
+
+- Added a standard-library Python analyzer that verifies captured object hashes/lengths, checks returned metric coverage independently of requested tags, and emits the four inventory/timeline artifacts under `analysis/`.
+- Verified 120 manifest entries, including 109 successful responses and 11 failed requests; 97 unique successful objects passed integrity checks.
+- Confirmed actual returned coverage: Pro 2,029/2,029 and Flash 2,062/2,062; no empty or entirely null series. Historical coordinates span steps 1–30; final live sampler state is step 31.
+- Cataloged 14 literal namespaces per run, 2,014 shared tag names, 15 Pro-only tags, and 48 Flash-only tags. Preserved nulls: 5,208 Pro slots and 4,418 Flash slots, without imputing values or causes.
+- Kept status, series, notices, and live records distinct. Flash status preserves earlier step-16/17 occurrences as well as later `redo: true` occurrences; historical series match the latter. The bounded status lists include fewer restart events than cumulative restart counters report.
+- Kept this pass descriptive. Next: inspect missingness and measurement semantics, then read the original SPAR proposal and map its required observables to what is actually exposed. No workload/interconnect classifier or causal claim yet.
+
 ## 2026-09-20 — First MiMo archive
 
 - Found Xiaomi's public MiMo-V2.6 RL dashboard and started by treating the browser as a probe rather than assuming an API.

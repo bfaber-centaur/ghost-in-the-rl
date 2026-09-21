@@ -3,3 +3,7 @@
 
 # Ignore data dir
 data/
+
+# Python analysis caches
+__pycache__/
+*.pyc
