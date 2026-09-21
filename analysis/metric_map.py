@@ -223,6 +223,16 @@ def main() -> int:
         w.writeheader()
         w.writerows(rows)
 
+    shortlist = [
+        row for row in rows
+        if row["scope_hint"] in {"run-global-looking", "train-subsystem"}
+    ]
+    shortlist_path = out / "metric-shortlist.csv"
+    with shortlist_path.open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=fieldnames)
+        w.writeheader()
+        w.writerows(shortlist)
+
     union_count = len(all_tags)
     shared = sum(all(tag in catalogs[k] for k in keys) for tag in all_tags)
     scope_counts = Counter(r["scope_hint"] for r in rows)
