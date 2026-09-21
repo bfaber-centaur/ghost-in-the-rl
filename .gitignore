@@ -1,0 +1,5 @@
+# Ignore all tar.gz compressed archives
+*.tar.gz
+
+# Ignore data dir
+data/
