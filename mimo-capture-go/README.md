@@ -30,6 +30,14 @@ data/mimo/
 
 `manifest.ndjson` records the capture time, exact endpoint URL, run/version, byte count, SHA-256, and object path for every response. Identical bodies reuse the same object.
 
+Backfills are resumable. On startup the collector reads successful historical `/series` entries from `manifest.ndjson` and skips metric tags already captured, even if a previous run used a different batch shape. Transient HTTP failures are retried with exponential backoff; if a `/series` batch still fails, the batch is recursively split so one large or pathological request does not discard the rest of the archive.
+
+The default retry count is four additional attempts. You can change it with:
+
+```bash
+go run . -retries 6 -out data/mimo
+```
+
 To skip the full ~2,000-tag historical backfill:
 
 ```bash
