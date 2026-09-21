@@ -155,7 +155,6 @@ def main() -> int:
     manifest_path = root / "manifest.ndjson"
     manifest_bytes = manifest_path.read_bytes()
     manifest_sha = hashlib.sha256(manifest_bytes).hexdigest()
-    analyzer_sha = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     manifest = load_manifest(root)
 
     catalogs: dict[tuple[str, str], set[str]] = {}
@@ -235,7 +234,6 @@ def main() -> int:
     md.append("# 01 — Metric map\n")
     md.append("First-pass map of the public MiMo RL metric surface. Scope labels below are lexical hints derived from tag paths, not publisher-confirmed aggregation semantics.\n")
     md.append(f"- Manifest SHA-256: `{manifest_sha}`")
-    md.append(f"- Analyzer SHA-256: `{analyzer_sha}`")
     md.append(f"- Run/version groups: {', '.join(f'`{r}@{v}`' for r, v in keys)}")
     md.append(f"- Exact union: **{union_count:,} tags**; shared by all groups: **{shared:,}**")
     for run, version in keys:
